@@ -92,12 +92,12 @@ def read_with_cache(Baseurl):
         cache_dict = {}
     if (urltag) in cache_dict.keys():
         soup = BeautifulSoup(cache_dict[urltag], 'html.parser')
-        print("Using cache")
+        print("Using cache", Baseurl)
     else:
         response = requests.get(Baseurl)
         soup = BeautifulSoup(response.text, 'html.parser')
         cache_dict[urltag] = response.text
-        print("Fetching")
+        print("Fetching", Baseurl)
         cache_file = open(CACHE_FILE_NAME, 'w')
         dumped_cache_dict = json.dumps(cache_dict)
         cache_file.write(dumped_cache_dict)
@@ -143,7 +143,7 @@ def api_with_cache(keyword):
         cache_dict = {}
     if urltag in cache_dict.keys():
         dict_result = json.loads(cache_dict[urltag])
-        print("Using cache")
+        print("Using cache", keyword)
     else:
         params = {
             'type':'search',
@@ -157,7 +157,7 @@ def api_with_cache(keyword):
         response = requests.get(PIXIV_BASEURL, params=params)
         dict_result = response.json()
         cache_dict[urltag] = response.text
-        print("Fetching")
+        print("Fetching", keyword)
         cache_file = open(CACHE_FILE_NAME, 'w')
         dumped_cache_dict = json.dumps(cache_dict)
         cache_file.write(dumped_cache_dict)
@@ -225,13 +225,16 @@ def images_for_date(date):
         dbwrite_image(keyword[0])
     conn.close()
 
+def fetch_daily_data():
+    soup = read_with_cache(RANKING_BASEURL)
+    dbwrite_animation(soup)
+    images_for_date('2020-11-30')
+
 '''
-soup = read_with_cache(RANKING_BASEURL)
-dbwrite_animation(soup)
 print_animation_detail_information('https://www.bilibili.com/bangumi/play/ss25739')
 '''
-images_for_date('2020-11-30')
 
+fetch_daily_data()
 
 '''
 webbrowser.open_new('https://www.pixiv.net/artworks/'+'85603266')
