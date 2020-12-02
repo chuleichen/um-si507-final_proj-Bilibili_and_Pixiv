@@ -43,7 +43,9 @@ def write_animation_record(animation, conn, cur):
     ranking_score = animation.find('div', class_='pts').text.strip()
     ranking_score = re.sub("\D", "", ranking_score)
     soup = read_with_cache(url)
-    score = float(soup.find('h4', class_='score').text.strip())
+    score = soup.find('h4', class_='score')
+    if score is not None:
+        score = float(score.text.strip())
     animation_record = [url, name, ranking, date, play, danmaku, subscribe, episode, ranking_score, score]
     animation_test = [url, date]
     animation_exist_test = '''
