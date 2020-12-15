@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title> Animation ranking </title>
+</head>
+<body>
+    <h1> This is today's animations ranking. </h1>
+    <table>
+        <tr>
+            <th> Ranking </th>
+            <th> Animation </th>
+        </tr>
+        {% for row in results %}
+        <tr>
+            <td> {{row[0]}} </td>
+            <td> {{row[1]}} </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>
+        See the ranking plot <a href = '/ranking_plot'> here </a> . 
+    </p>
+    <p>
+        See the plot for ranking vs. number of images on Pixiv <a href = '/ranking_vs_images'> here </a> . 
+    </p>
+    <br/>
+    <h2> Choose the ranking of the animation and see the detail information! </h2>
+    <form action="/handle_form" method="POST">
+        <p>
+            Please type the ranking of the animation: <input name = "ranking" type = "text"/><br/>
+        </p> 
+        <input type="submit" value="Go!"/>
+    </form>
+    <br/>
+    <h2> Choose the ranking of the animation and see the related Pixiv images! </h2>
+    <form action="/Pixiv_images" method="POST">
+        <p>
+            Please type the ranking of the animation: <input name = "ranking_2" type = "text"/><br/>
+        </p> 
+        <input type="submit" value="Go!"/>
+    </form>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title> Animation Detail </title>
+</head>
+<body>
+    <h1> Animation Details </h1>
+    <table>
+        <tr>
+            <td> Title </td>
+            <td> {{result[0]}} </td>
+        </tr>
+        <tr>
+            <td> Number of Episodes </td>
+            <td> {{result[1]}} </td>
+        </tr>
+        <tr>
+            <td> Score </td>
+            <td> {{result[2]}} </td>
+        </tr>
+        <tr>
+            <td> Number of Play </td>
+            <td> {{result[3]}} </td>
+        </tr>
+        <tr>
+            <td> Number of Danmuku </td>
+            <td> {{result[4]}} </td>
+        </tr>
+        <tr>
+            <td> Number of Subscribe </td>
+            <td> {{result[5]}} </td>
+        </tr>
+    </table>
+    <h3> Description </h3>
+    <p> {{result[6]}} </p>
+    <h2> Ranking of the animation </h2>
+    {{plot_div | safe}}
+    <p>
+        Return <a href = '/'> home </a>
+    </p>
+</body>
+</html>
